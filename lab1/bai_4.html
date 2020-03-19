@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      .inline {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container my-3">
+      <div>
+        <button onclick="search_data()" class="btn btn-primary">Search</button>
+        <input
+          type="text"
+          name="search"
+          class="form-control col-md-4 inline"
+          id="search"
+        />
+      </div>
+      <div>
+        <label for="msv">Ma sv</label>
+        <input
+          type="text"
+          id="code"
+          class="form-control col-md-4"
+        />
+      </div>
+
+      <div>
+        <label for="name">Ho ten</label>
+        <input type="text" id="name" class="form-control col-md-4" />
+      </div>
+
+      <div>
+        <label for="date">Ngay sinh</label>
+        <input type="date" id="dob" class="form-control col-md-4" />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="Email" id="email" class="form-control col-md-4" />
+      </div>
+
+      <div style="margin: 20px;">
+        <button onclick="addFirst()" class="btn btn-primary">
+          Thêm vào đầu danh sách
+        </button>
+        <button onclick="addLast()" class="btn btn-primary">
+          Thêm vào cuối danh sách
+        </button>
+      </div>
+
+      <table class="table">
+        <tr>
+          <th>Mã SV</th>
+          <th>Họ Tên</th>
+          <th>Ngày Sinh</th>
+          <th>Email</th>
+        </tr>
+        <tbody id="tbl-body"></tbody>
+      </table>
+      <button onclick="deleteFirst()">Xóa đầu</button>
+      <button onclick="deleteLast()">Xóa cuối</button>
+      <button onclick="reverse()">Đảo ngược</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      var x = "";
+      var studentList = [];
+
+      function addFirst() {
+        const code = document.querySelector("#code").value;
+        const name = document.querySelector("#name").value;
+        const dob = document.querySelector("#dob").value;
+        const email = document.querySelector("#email").value;
+
+        let studentInfo = {
+          'code': code,
+          'name': name,
+          'dob': dob,
+          'email': email
+        };
+
+        studentList.unshift(studentInfo);
+        renderTable();
+      }
+
+      function addLast() {
+        const code = document.querySelector("#code").value;
+        const name = document.querySelector("#name").value;
+        const dob = document.querySelector("#dob").value;
+        const email = document.querySelector("#email").value;
+
+        let studentInfo = {
+          'code': code,
+          'name': name,
+          'dob': dob,
+          'email': email
+        };
+
+        studentList.push(studentInfo);
+        renderTable();
+      }
+
+      function deleteFirst() {
+        studentList.shift();
+        renderTable();
+      }
+
+      function deleteLast() {
+        studentList.pop();
+        renderTable();
+      }
+
+      function reverse() {
+        studentList.reverse();
+        renderTable();
+      }
+
+      function renderTable() {
+        const tblTemplateStr = studentList.map(function (value) {
+            return `
+                <tr>
+                  <td>${ value.code }</td>
+                  <td>${ value.name }</td>
+                  <td>${ value.dob }</td>
+                  <td>${ value.email }</td>
+                </tr>
+            `;
+        }).join('');
+
+        document.getElementById('tbl-body').innerHTML = '';
+        document.getElementById('tbl-body').innerHTML = tblTemplateStr;
+      }
+
+    </script>
+  </body>
+</html>

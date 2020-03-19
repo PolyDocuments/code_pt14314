@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        <table class="table">
+        <tr>
+            <th>Mã SV</th>
+            <th>Họ Tên</th>
+            <th>Ngày Sinh</th>
+            <th>Email</th>
+        </tr>
+        <tbody id="tbl-body">
+        </tbody>
+        </table>
+
+        <!-- Jquery CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </body>
+    <script>
+        const listStudent = [
+            {
+                'code': 'PH12345',
+                'name': 'Nguyen Van A',
+                'date_of_birth': (new Date()).toString(),
+                'email': 'anguyenvan@gmail.com',
+            },
+            {
+                'code': 'PH12346',
+                'name': 'Nguyen Van B',
+                'date_of_birth': (new Date()).toString(),
+                'email': 'bnguyenvan@gmail.com',
+            },
+            {
+                'code': 'PH12347',
+                'name': 'Nguyen Van C',
+                'date_of_birth': (new Date()).toString(),
+                'email': 'cnguyenvan@gmail.com',
+            },
+        ];
+
+        // template string
+        const tblTemplateStr = listStudent.map(function (value) {
+            return `
+                <tr>
+                    <td>${ value.code }</td>
+                    <td>${ value.name }</td>
+                    <td>${ value.date_of_birth }</td>
+                    <td>${ value.email }</td>
+                </tr>
+            `;
+        }).join();
+
+        document.querySelector('#tbl-body').innerHTML = tblTemplateStr;
+
+    </script>
+</html>
